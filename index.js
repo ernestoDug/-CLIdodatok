@@ -1,9 +1,4 @@
-const {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-} = require("./contacts");
+const contacts = require("./contacts.js");
 
 const { Command } = require("commander");
 
@@ -19,31 +14,29 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-async function invokeAction({ action, name, id,  email, phone }) {
+function invokeAction({ action, name, id,  email, phone }) {
 
   switch (action) {
     case "list":
-     const listCont =  await   listContacts();
-      console.log(listCont);
+      contacts.listContacts();
      break;
 
     case "get":
-      const findIdCont = await  getContactById(id);
-      console.log(findIdCont);
+      contacts.getContactById(id); 
      break;
 
 
-    case "add":
-    const newCont =   await  addContact(name, email, phone);
-    return console.log(newCont);
+     case "add":
+      contacts.addContact(name, email, phone);
       break;
 
+
     case "remove":
-      await    removeContact(id);
+      contacts.removeContact(id);
       break;
 
     default:
-      // console.warn("\x1B[31m Unknown2 action type!");
+      console.warn("\x1B[31m Unknown2 action type!");
   }
 }
 
@@ -51,7 +44,14 @@ invokeAction(argv);
 
 
 // invokeAction({action: 'list'});  
-// invokeAction({action: 'get', id: "qdggE76Jtbfd9eWJHrssH" }); 
-// invokeAction({action: 'add', email: "abracadabra@bred.net",phone: 456546546 }); 
+// invokeAction({action: 'get', id: 'rsKkOQUi80UsgVPCcLZZW' }); 
+// invokeAction(
+//   {action: 'add',
+//    email: "ddddd@bred.net",
+//    phone: "456546546" }
+//    ); 
+// invokeAction({action: 'remove', id: "Lt7ZFMhsxqqgSFNJqbMLw" }); 
+
+
 
 
