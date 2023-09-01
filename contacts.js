@@ -11,8 +11,7 @@ const listContacts = async () => {
     const data = await fs.readFile(contactsPath);
     console.table(JSON.parse(data));
     return JSON.parse(data);
-    
-  } catch (error) {
+      } catch (error) {
     console.log("cannot read contacts");
   }
 };
@@ -63,6 +62,19 @@ const removeContact = async (contactId) => {
   return deletedcont;
 }
 
+// const removeContact = async (contactId) => {
+//       try {
+//             const dateForDell = await listContacts();
+//         const deleteContact = dateForDell.filter((item) => item.id !== contactId);
+//          await fs.writeFile(contactsPath, JSON.stringify(deleteContact, null, 2));
+//          console.log(dateForDell[contactId] || null);
+//          return dateForDell;
+//       }
+      
+//        catch (error) {
+//         console.log("cannot delete contact" );
+//       }
+//       };
 
 module.exports = {
   listContacts,

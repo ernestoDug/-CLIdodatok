@@ -31,20 +31,26 @@
 // });
 
 
+// **************** сплайсим вместо фтльтра
 
-// const removeContact = async (contactId) => {
-//     try {
-//           const dateForDell = await listContacts();
-//       const deleteContact = dateForDell.filter((item) => item.id !== contactId);
-//        await fs.writeFile(contactsPath, JSON.stringify(deleteContact, null, 2));
-//        console.log(deleteContact || null);
-//        return deleteContact;
-//     }
-    
-//      catch (error) {
-//       console.log("cannot delete contact" );
-//     }
-//     };
-    
+/// const removeContact = async (contactId) => {
+//   const dateForDell = await listContacts();
+//   const index = dateForDell.findIndex(cont => cont.id === contactId);
 
-// module.exports = router;
+//   const deletedcont = dateForDell[index];
+//   if(index !== -1) {
+//     dateForDell.splice(index, 1);
+//       await fs.writeFile(contactsPath, JSON.stringify(dateForDell, null, 2));
+//   }
+//   console.log(deletedcont || null);
+//   return deletedcont;
+// }
+
+
+// ******************************************************
+// komandiiiiiiiiiiiiiiiiiiiii
+
+// node index -a get -i05olLMgyVQdWRwgKfg5J68888
+// node index -a list
+// node index -a add -n Jaramy -e gf@fff.gmail.com -p 0-897-77-98-575
+// node index -a remove -i t--Pc24qwzfINGtwpD_Vi
