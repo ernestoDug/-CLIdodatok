@@ -16,12 +16,10 @@ const listContacts = async () => {
     console.log("cannot read contacts");
   }
 };
-
 // 2
 const getContactById = async (contactId) => {
   try {
     const dataForId = await listContacts();
-
     const findContact = dataForId.find((item) => item.id === contactId);
     return console.log(findContact || null);
   } catch (error) {
@@ -36,37 +34,21 @@ const addContact = async (name, email, phone) => {
     const dataAdd =  await listContacts();
     const newContact = {
       id: nanoid(),
-      name:'',
-      email:'',
-      phone:'',
+      name,
+      email,
+      phone,
     };
 
     const data = [...dataAdd, newContact];
     await fs.writeFile(contactsPath, JSON.stringify(data, null, 2));
-         console.table(data);
+         console.log(newContact);
          return data;
   } catch (error) {
     console.log("cannot add contact");
   }
 };
 
-// const addContact = async (name, email, phone) => {
-//   const newContact = {
-//           id: nanoid(),
-//           name:'',
-//           email:'',
-//           phone:'',
-//         };
-//   const contactsAll = await listContacts();
-//   contactsAll.push(newContact);
-
-//   await fs.writeFile(contactsPath, JSON.stringify(contactsAll));
-// }
-
-
-
 // 4
-
 
 const removeContact = async (contactId) => {
   const dateForDell = await listContacts();
@@ -77,7 +59,8 @@ const removeContact = async (contactId) => {
     dateForDell.splice(index, 1);
       await fs.writeFile(contactsPath, JSON.stringify(dateForDell, null, 2));
   }
-  return deletedcont ? deletedProduct : null;
+  console.log(deletedcont || null);
+  return deletedcont;
 }
 
 
