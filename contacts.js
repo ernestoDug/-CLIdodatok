@@ -2,16 +2,14 @@ const path = require("path");
 const fs = require("fs").promises;
 const { nanoid } = require("nanoid");
 
-
 const contactsPath = path.join(__dirname, "db/contacts.json");
-
 // 1
 const listContacts = async () => {
   try {
     const data = await fs.readFile(contactsPath);
     console.table(JSON.parse(data));
     return JSON.parse(data);
-      } catch (error) {
+  } catch (error) {
     console.log("cannot read contacts");
   }
 };
@@ -22,60 +20,40 @@ const getContactById = async (contactId) => {
     const findContact = dataForId.find((item) => item.id === contactId);
     return console.log(findContact || null);
   } catch (error) {
-    console.log("cannot read id"); 
+    console.log("cannot read id");
   }
 };
-
 // 3
-
 const addContact = async (name, email, phone) => {
   try {
-    const dataAdd =  await listContacts();
+    const dataForAdd = await listContacts();
     const newContact = {
       id: nanoid(),
       name,
       email,
       phone,
     };
-
-    const data = [...dataAdd, newContact];
+    const data = [...dataForAdd, newContact];
     await fs.writeFile(contactsPath, JSON.stringify(data, null, 2));
-         console.log(newContact);
-         return data;
+    console.log(newContact);
+    return data;
   } catch (error) {
     console.log("cannot add contact");
   }
 };
-
 // 4
-
 const removeContact = async (contactId) => {
   const dateForDell = await listContacts();
-  const index = dateForDell.findIndex(cont => cont.id === contactId);
-
+  const index = dateForDell.findIndex((cont) => cont.id === contactId);
   const deletedcont = dateForDell[index];
-  if(index !== -1) {
+  if (index !== -1) {
     dateForDell.splice(index, 1);
-      await fs.writeFile(contactsPath, JSON.stringify(dateForDell, null, 2));
+    await fs.writeFile(contactsPath, JSON.stringify(dateForDell, null, 2));
   }
   console.log(deletedcont || null);
   return deletedcont;
-}
 
-// const removeContact = async (contactId) => {
-//       try {
-//             const dateForDell = await listContacts();
-//         const deleteContact = dateForDell.filter((item) => item.id !== contactId);
-//          await fs.writeFile(contactsPath, JSON.stringify(deleteContact, null, 2));
-//          console.log(dateForDell[contactId] || null);
-//          return dateForDell;
-//       }
-      
-//        catch (error) {
-//         console.log("cannot delete contact" );
-//       }
-//       };
-
+};
 module.exports = {
   listContacts,
   getContactById,

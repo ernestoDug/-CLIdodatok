@@ -33,7 +33,7 @@ function invokeAction({ action, name, id, email, phone }) {
       break;
 
     default:
-      console.warn("\x1B[31m Unknown2 action type!");
+      console.warn("\x1B[31m Unknown action type!");
   }
 }
 
